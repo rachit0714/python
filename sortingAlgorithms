@@ -1,0 +1,148 @@
+
+def select_sort(lst):
+    '''
+    Sorts lst by finding minimum value in the unsorted portion of the list
+    and then swaps it with the item to the right of the sorted portion of the
+    list
+    >>> lst = [2,1,3,5,6,4]
+    >>> select_sort(lst)
+    >>> lst
+    [1, 2, 3, 4, 5, 6]
+    '''
+    counter = 0
+    traverse = 1
+    minimum = 0
+    length = len(lst)
+
+    while counter < length:
+        while traverse < length:
+            if (lst[traverse] < lst[minimum]):
+                minimum = traverse
+            traverse += 1
+        temp = lst[counter]
+        lst[counter] = lst[minimum]
+        lst[minimum] = temp
+        counter += 1
+        minimum = counter
+        traverse = counter + 1
+
+
+def bubble_sort(lst):
+    '''
+    Sorts lst by comparing one by one each item to the item next to it
+    if the second item is less than the first, then swap and move on
+    until the end of the list, if not then just continue through the list.
+    Repeat until you go through the list without making any swaps.
+    >>> lst = [2,1,3,5,6,4]
+    >>> select_sort(lst)
+    >>> lst
+    [1, 2, 3, 4, 5, 6]
+    '''
+    swapped = True
+    traversing_index = 0
+    length = len(lst)
+
+    while(swapped):
+        swapped = False
+        traversing = 0
+        for traversing in range(length - 1):
+            cur = lst[traversing]
+            nextt = lst[traversing + 1]
+            if (cur > nextt):
+                lst[traversing] = nextt
+                lst[traversing + 1] = cur
+                swapped = True
+            traversing += 1
+
+
+def cocktail_sort(lst):
+    swapped = True
+    traverse = 0
+    length = len(lst)
+    
+    while (swapped):
+        swapped = False
+        for traverse in range(length - 1):
+            if (lst[traverse] > lst[traverse + 1]):
+                temp = lst[traverse]
+                lst[traverse] = lst[traverse+1]
+                lst[traverse+1] = temp
+                swapped = True
+
+        for traverse in range(traverse, 1, -1):
+            if (lst[traverse] < lst[traverse-1]):
+                temp = lst[traverse]
+                lst[traverse] = lst[traverse-1]
+                lst[traverse-1] = temp
+                swappped  = True
+
+def odd_even_sort(lst):
+    '''
+    Similar to selection sort but first by doing it on odd positioned
+    values in the list and then with the even position values until
+    you can go through the list without making any swaps
+    '''
+    is_sorted = False
+    length = len(lst)
+    r = length
+    if (length % 2 == 0):
+        r -= 3
+    else:
+        r -=2
+    
+    while(is_sorted == False):
+        is_sorted = True
+        for i in range(1,r,2):
+            if(lst[i] > lst[i+2]):
+                is_sorted = False
+                temp = lst[i]
+                lst[i] = lst[i+2]
+                lst[i+2] = temp
+        for j in range(0,r,2):
+            if(lst[i] > lst[i+2]):
+                is_sorted = False
+                temp = lst[i]
+                lst[i] = lst[i+2]
+                lst[i+2] = temp
+                
+
+def merge_sort(lst):
+    left = []
+    right = []
+    middle = len(lst)//2
+    middle -= 1
+    left = lst[:middle]
+    right = lst[middle:]
+    l,r,m = 0, 0, 0
+
+    while (l < middle and r < middle):
+        if (left[l] <= right[r]):
+            lst[m] = left[l]
+            l += 1
+            m +=1
+        else:
+            lst[m] = right[r]
+            r += 1
+            m += 1
+
+    while (l < middle):
+        lst[m] = left[l]
+        m += 1
+        l += 1
+
+    while (r < middle):
+        lst[m] = right[r]
+        m += 1
+        l += 1
+        
+
+
+
+
+
+
+
+
+
+
+
