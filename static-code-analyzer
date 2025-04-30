@@ -1,0 +1,27 @@
+import ast
+
+code = """
+def add(a, b):
+    return a + b
+
+def multiply(x, y):
+    return x * y
+"""
+
+tree = ast.parse(code)
+
+class FunctionVisitor(ast.NodeVisitor):
+  def visit_FunctionDef(self, node):
+    print(f"Function name: {node.name}")
+    self.generic_visit(node)
+
+if __name__ == "__main__":
+  code = """
+  def add(a, b):
+      return a + b
+
+  def multiply(x, y):
+      return x * y
+  """
+  visitor = FunctionVisitor()
+  visitor = visit(tree)
